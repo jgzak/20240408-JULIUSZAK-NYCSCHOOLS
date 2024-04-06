@@ -5,7 +5,7 @@ import { getSchoolDetails } from '../api/nycschools';
 import Pair from './Pair';
 import { Spinner } from 'react-bootstrap';
 
-
+// this array is used to iterate over the school details and display them in the component, it can be extended to include more details. To see all the details available check the NYCSchoolDetails type in types.ts
 const details: [string, keyof NYCSchoolDetails][] = [["Borough: ", "borough"], ["Location: ", "location"], ["Phone: ", "phone_number"] ]
 
 

@@ -10,7 +10,7 @@ interface PairProps {
 
 const Pair: React.FC<PairProps> = ({ label, value }) => {
     return (
-        <div><span>{label}</span><span>{value}</span></div>
+        <div><span>{label}</span><span data-testid={label}>{value}</span></div>
     );
 };
 

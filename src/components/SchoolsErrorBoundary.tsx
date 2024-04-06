@@ -15,7 +15,6 @@ class SchoolsErrorBoundary extends Component<Props, State> {
     }
   
     componentDidCatch(_error: Error, _errorInfo: unknown) {
-        console.log("*******   in componentDidCatch" )
         this.setState({ hasError: true });
     }
 
@@ -29,7 +28,7 @@ class SchoolsErrorBoundary extends Component<Props, State> {
         return <>
             <h1>Application Error</h1>
             <p>Something went wrong</p>
-            <button onClick={() => this.resetError()}>Try again</button>
+            <button onClick={() => this.resetError.bind(this)()}>Try again</button>
         </>;
       }
   
