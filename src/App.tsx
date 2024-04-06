@@ -1,34 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+/**
+ * The main component of the NYC Schools App.
+ * Renders the layout of the application, including the header, school list, school details, and SAT scores.
+ * Manages the state of the selected school and handles fetching the list of NYC schools from the API.
+ */
 import './App.css'
+import NYCShools from './components/NYCShools'
+import SchoolDetails from './components/SchoolDetails'
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from 'react';
+import { NYCSchool } from './types';
+import { getSchools } from './api/nycschools';
+import SATScores from './components/SATScores';
+import SchoolsErrorBoundary from './components/SchoolsErrorBoundary';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [nycschools, setNYCSchools] = useState<NYCSchool[] | null>(null);
+  const [selectedSchool, setSelectedSchool] = useState<NYCSchool | null>(null);
+  const [initView, setInitView] = useState<boolean>(true);
+  const [errorFetching, setErrorFetching] = useState<boolean>(false);
+
+    useEffect(() => {
+        getSchools().then((data) => { 
+            setNYCSchools(data);
+        }).catch(() => {
+            setErrorFetching(true);
+        })  
+    }, []);
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Container fluid>
+      <SchoolsErrorBoundary>
+        <Row className={"p-2"}>
+          <Col><h1>New York City Schools</h1></Col>
+        </Row>
+        <Row className={"p-2"}>
+          <Col xs={4}>
+            <NYCShools nycschools={nycschools} setSelectedSchool={setSelectedSchool} setInitView={setInitView} initView={initView} errorFetching={errorFetching}/>
+          </Col>
+          <Col xs={5}>
+            <SchoolDetails selectedSchool={selectedSchool} key={selectedSchool?.dbn} initView={initView}/>     
+          </Col>
+          <Col>
+            <SATScores selectedSchool={selectedSchool} key={selectedSchool?.dbn} initView={initView}/>
+          </Col>
+        </Row>
+      </SchoolsErrorBoundary>
+    </Container>
   )
 }
 

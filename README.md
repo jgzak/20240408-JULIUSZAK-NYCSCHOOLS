@@ -1,5 +1,13 @@
 # NYC schools App
 
+This application shows list of NYC schools. 
+When user clicks on of the schools in the list. Details and SAT portions are populated with data fetched from API
+
+To run this app:
+  `npm install`
+  `npm run dev`
+
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
