@@ -4,14 +4,19 @@ This application shows list of NYC schools.
 When user clicks on one of the schools in the list Details and SAT parts are populated with data fetched from API.
 
 ## To run this app:
-  `npm install`
-  `npm run dev`
+  - `npm install`
+  - `npm run dev`
 
 ## To run tests:
-  `npm run test`
+  - `npm run test`
 
 ## Performans
-`NYCSchools` component is loading all schools in one call, however in order to keep response slim, we are only loading `school_name` and `dbn` attributes. When user cliks on one of the schools: `dbn` passed to `SATScores` and `SchoolDetails` which both loading its corresponding data. We could load everything in one shot (schools and details) but what if list of schools was 40k records and not 400? Also user may not click on every single school, why to compromise initail performance? 
+`NYCSchools` component is loading all schools in one call, however in order to keep the response slim, we are only loading `school_name` and `dbn` attributes. When a user clicks on one of the schools, the `dbn` is passed to `SATScores` and `SchoolDetails`, which both load their corresponding data. We could load everything in one shot (schools and details), but what if the list of schools was 40k records instead of 400? Also, the user may not click on every single school, so why compromise initial performance? 
+
+## Tests
+There are two test 
+- `App.test.tsx`: This test simulates user actions. It waits until the initial data is loaded (list of schools), then the user clicks on one of the schools. It further waits until the data in the corresponding components is loaded and then verifies that the data is rendered correctly. This test is integration test, since its rendering whole component sub-three
+- `SATScores.test.tsx`: This test renders only one component. This is unit test.
 
 
 
