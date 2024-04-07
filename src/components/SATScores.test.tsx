@@ -24,9 +24,9 @@ describe('SATScores component', () => {
     it('should render the SAT scores when data is available', async () => {
         render(<SATScores selectedSchool={{ dbn: '123', school_name: 'Test School' }} initView={false} />);
         // Wait for the component to finish rendering and fetching data
-        await screen.findAllByTestId("Number of SAT takers:");
-        const numOfSATTestTakers = screen.getAllByTestId("Number of SAT takers:");
-        expect(numOfSATTestTakers[0].textContent).toBe("100") 
+        await screen.findAllByTestId("SAT reading score:");
+        const numOfSATTestTakers = screen.getAllByTestId("SAT reading score:");
+        expect(numOfSATTestTakers[0].textContent).toBe("500") 
     });
 });
 

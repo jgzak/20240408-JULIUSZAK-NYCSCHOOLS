@@ -6,7 +6,15 @@ import Pair from './Pair';
 import { Spinner } from 'react-bootstrap';
 
 // this array is used to iterate over the school details and display them in the component, it can be extended to include more details. To see all the details available check the NYCSchoolDetails type in types.ts
-const details: [string, keyof NYCSchoolDetails][] = [["Borough: ", "borough"], ["Location: ", "location"], ["Phone: ", "phone_number"] ]
+const details: [string, keyof NYCSchoolDetails][] = [["Borough: ", "borough"], 
+["Location: ", "location"], 
+["Phone: ", "phone_number"], 
+["Advanced Placement: ", "advancedplacement_courses"], 
+["Extracurricular activities: ", "extracurricular_activities"],
+["ELL Programs: ", "ell_programs"],
+["Interest: ", "interest1"],
+["Overview: ", "overview_paragraph"]
+]
 
 
 /**
@@ -25,7 +33,7 @@ const SchoolDetails: React.FC<InputProps> = ({selectedSchool, initView}: InputPr
 
     useEffect(() => {
         selectedSchool?.dbn && getSchoolDetails(selectedSchool?.dbn).then((data) => { 
-            setSchoolDetails(data[0]);
+            setSchoolDetails((data as NYCSchoolDetails[])[0]);
         }).catch(() => {
             setErrorFetching(true);
         }) 
@@ -33,9 +41,10 @@ const SchoolDetails: React.FC<InputProps> = ({selectedSchool, initView}: InputPr
 
     
     return (
-        <Card data-testid="school-details-dt" style={{ height: 840 }}>
+        <Card data-testid="school-details-dt" className="nyc-schools-card" style={{minHeight: "60vh"}}>
             <Card.Header>Details</Card.Header>
             <Card.Body>
+            
                 <Card.Title>{selectedSchool && selectedSchool.school_name}</Card.Title>
                 {errorFetching ? 
                 <Card.Text>{"Error fetching school details"}</Card.Text> :

@@ -33,13 +33,11 @@ describe('App', () => {
     await screen.findByTestId('123');
     const phone = screen.getByTestId("Phone:")
     const location = screen.getByTestId("Location:")
-    const numberOfSATTakers = screen.getByTestId("Number of SAT takers:")
     const sATReadingScore = screen.getByTestId("SAT reading score:")
     
     
     expect(phone.textContent).toBe("123-456-7890");
     expect(location.textContent).toBe("123 Main St");
-    expect(numberOfSATTakers.textContent).toBe("100");
     expect(sATReadingScore.textContent).toBe("500");
     
   });

@@ -17,6 +17,7 @@ import { NYCSchool } from './types';
 import { getSchools } from './api/nycschools';
 import SATScores from './components/SATScores';
 import SchoolsErrorBoundary from './components/SchoolsErrorBoundary';
+import { Navbar } from 'react-bootstrap';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
 
     useEffect(() => {
         getSchools().then((data) => { 
-            setNYCSchools(data);
+            setNYCSchools(data as NYCSchool[]);
         }).catch(() => {
             setErrorFetching(true);
         })  
@@ -36,24 +37,32 @@ function App() {
 
 
   return (
-    <Container fluid>
-      <SchoolsErrorBoundary>
-        <Row className={"p-2"}>
-          <Col><h1>New York City Schools</h1></Col>
-        </Row>
-        <Row className={"p-2"}>
-          <Col xs={4}>
-            <NYCShools nycschools={nycschools} setSelectedSchool={setSelectedSchool} setInitView={setInitView} initView={initView} errorFetching={errorFetching}/>
-          </Col>
-          <Col xs={5}>
-            <SchoolDetails selectedSchool={selectedSchool} key={selectedSchool?.dbn} initView={initView}/>     
-          </Col>
-          <Col>
-            <SATScores selectedSchool={selectedSchool} key={selectedSchool?.dbn} initView={initView}/>
-          </Col>
-        </Row>
-      </SchoolsErrorBoundary>
-    </Container>
+    <>
+      <Navbar expand="lg" className="bg-body-tertiary nyc-schools-navbar-brand" >
+        <Navbar.Brand>New York City Schools</Navbar.Brand>
+      </Navbar>
+      <Container fluid >
+          <SchoolsErrorBoundary>        
+            <Row className={"p-2"} >
+              <Col xs={4}>
+                <NYCShools nycschools={nycschools} setSelectedSchool={setSelectedSchool} setInitView={setInitView} initView={initView} errorFetching={errorFetching}/>
+              </Col>
+              <Col xs={5}>
+                <Row>
+                  <Col>
+                    <SchoolDetails selectedSchool={selectedSchool}  key={selectedSchool?.dbn} initView={initView}/>
+                  </Col>
+                </Row>   
+                <Row>
+                  <Col className="gy-2">
+                    <SATScores selectedSchool={selectedSchool} key={selectedSchool?.dbn} initView={initView}/>
+                  </Col>
+                </Row>  
+              </Col>
+            </Row>
+          </SchoolsErrorBoundary>
+      </Container>
+    </>
   )
 }
 

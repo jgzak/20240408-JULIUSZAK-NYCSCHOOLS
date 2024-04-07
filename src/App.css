@@ -18,3 +18,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.nyc-schools-card {
+  padding: 0;
+}
+
+.nyc-schools-navbar-brand {
+  padding-left: 24px !important;
+}
