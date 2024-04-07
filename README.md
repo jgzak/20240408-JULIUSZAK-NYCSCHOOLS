@@ -1,11 +1,23 @@
 # NYC schools App
 
 This application shows list of NYC schools. 
-When user clicks on of the schools in the list. Details and SAT portions are populated with data fetched from API
+When user clicks on one of the schools in the list Details and SAT parts are populated with data fetched from API.
 
-To run this app:
+## To run this app:
   `npm install`
   `npm run dev`
+
+## To run tests:
+  `npm run test`
+
+## Performans
+`NYCSchools` component is loading all schools in one call, however in order to keep response slim, we are only loading `school_name` and `dbn` attributes. When user cliks on one of the schools: `dbn` passed to `SATScores` and `SchoolDetails` which both loading its corresponding data. We could load everything in one shot (schools and details) but what if list of schools was 40k records and not 400? Also user may not click on every single school, why to compromise initail performance? 
+
+
+
+
+
+
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

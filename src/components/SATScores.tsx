@@ -41,14 +41,14 @@ const SATScores: React.FC<InputProps> = ({selectedSchool, initView}) => {
     
 
     return (
-        <Card style={{ height: 840 }}>
+        <Card data-testid="sat-scores-card-dt" style={{ height: 840 }}>
             <Card.Header>SAT Scores</Card.Header>
             <Card.Body>
                 {errorFetching ? 
                 <Card.Text>There was an error fetching the SAT scores</Card.Text> : 
-                <Card.Text>
+                <>
                     {initView ? <span data-testid={"sat-scores-dt"}>Select school from the list</span> : ( schoolScores !== null ? satScores.map((scoreDetails) => <Pair key={scoreDetails[0]} label={scoreDetails[0]} value={schoolScores[scoreDetails[1]]} />) : <Spinner data-testid="sat-score-spinner-dt" animation="border" variant="primary" />)} 
-                </Card.Text>}
+                </>}
             </Card.Body>
         </Card>
     );

@@ -35,11 +35,11 @@ const NYCShools: React.FC<OwnProps> = ({nycschools, setSelectedSchool, setInitVi
 
 
     return (
-        <Card className="overflow-scroll" style={{ height: 840 }}>
+        <Card data-testid="school-list-dt" className="overflow-scroll" style={{ height: 840 }}>
             {errorFetching ? <CardText>{"Error fetching list of schools"}</CardText>:
             <ListGroup variant="flush">
                 {nycschools && nycschools.map((school) => (
-                    <ListGroup.Item key={school.school_name} action onClick={() => onSchoolClickHandler(school.dbn)}>{school.school_name}</ListGroup.Item>
+                    <ListGroup.Item data-testid={school.dbn} key={school.school_name} action onClick={() => onSchoolClickHandler(school.dbn)}>{school.school_name}</ListGroup.Item>
                 ))}
             </ListGroup>}
         </Card>)
