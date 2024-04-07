@@ -10,7 +10,7 @@ vi.mock('./api/nycschools', () => ({
 }));
 
 describe('App', () => {
-  // const user = userEvent.setup()
+
   it('render list of schools, find school in a list, click on it, verify all data populated in details and scores components', async () => {
     
     render(<App />);
