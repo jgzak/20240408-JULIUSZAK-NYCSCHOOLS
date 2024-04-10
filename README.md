@@ -9,6 +9,7 @@ When user clicks on one of the schools in the list Details and SAT parts are pop
 
 ## To run tests:
   - `npm run test`
+  
 
 ## Performance
 The `NYCSchools` component loads all schools in one call, but only retrieves the `school_name` and `dbn` attributes to keep the response slim. When a user clicks on a school, the `dbn` is passed to `SATScores` and `SchoolDetails`, which then load their corresponding data. This approach allows for better performance, especially when dealing with a large number of schools. Additionally, it avoids unnecessary loading of data for schools that the user may not interact with.
